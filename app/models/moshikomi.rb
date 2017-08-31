@@ -1,0 +1,2 @@
+class Moshikomi < ApplicationRecord
+end

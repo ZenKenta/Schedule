@@ -1,0 +1,32 @@
+<% @title='候補日登録' %>
+<h1><%= @title %></h1>
+<div id="generic-form">
+<%=form_for [@nittei_cyosei] do |f| %>
+  <div class="field">
+    <%= f.hidden_field :eventid ,:value=> @eventid%>
+    <%= f.label :nengetsuhi,'候補日'  %>
+    <%= f.text_field :nengetsuhi ,size:10 %>
+    <%= f.submit '追加' %>
+    <%= link_to '確定' , :controller => 'personal_schedules', :action => 'index', :eventid => @eventid %>
+  </div>
+
+<% end %>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nittei_cyoseis.each do |nittei| %>
+      <tr>
+        <td><%= nittei.nengetsuhi %></td>
+        <td><%= link_to '削除', nittei, method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

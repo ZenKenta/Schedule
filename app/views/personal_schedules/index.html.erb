@@ -1,0 +1,76 @@
+
+<% @title='予定一覧'%>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+<div class="table-wrapper">
+
+<table class="listing">
+<tr>
+  <th>参加者</th>
+  <% @nittei_cyosei.each do |n| %>
+  <th><%= n.nengetsuhi %></th>
+  <% end %>
+</tr>
+
+<tr>
+<% @schedule_list.each do |f| %>
+<!-- 対象者が切り替わった段階で改行  -->    
+  <% if @temp!=f.shimei then -%>
+  </tr>
+  <tr><td><%= link_to f.shimei, personal_schedules_path(shimei: f.shimei,eventid: @eventid) %></td><td><%= f.value %></td>
+  <% else -%><td><%= f.value %></td></tr><tr>
+  <%end%>
+  <% @temp= f.shimei%>
+  
+<% end %>
+</tr>
+ </table>
+</div>
+<br>
+<br>
+
+
+
+
+<div align="center">名前:
+
+        <% if @personal_schedules.first.shimei.present?  -%>          
+            <label name="input-shimei" ><%=@personal_schedules.first.shimei%></label>
+            <%@method='PATCH' -%>
+            <%@type='UPDATE' -%>
+        <% else -%>
+            <input type="text" name="input-shimei" >
+            <%@meshod='POST' -%>
+            <%@type='CREATE' -%>
+        <% end %>
+</div>
+  <%= form_tag personal_schedules_path, method: @method,action:@type do  %>
+   <table align="center">
+    <% @personal_schedules.each_with_index do | personal_schedule,i | %>
+    <%=fields_for "personal_schedules[]" ,personal_schedule do |f|%>
+    <tr>
+        <td>
+          <%= f.label :nengetsuhi,@nittei_cyosei[i].nengetsuhi%>
+        </td>
+        <td>
+          <%= f.hidden_field  :id %>
+          <%= f.hidden_field  :eventid, :value=> @eventid %>
+          <%= f.hidden_field  :nengetsuhi,:value=> @nittei_cyosei[i].nengetsuhi %>
+          <!-- 氏名：テキストボックスに入力した内容を登録時にセット --> 
+          <%= f.hidden_field  :shimei ,id: 'shimei'%>     
+          <%= f.select  :value,["○","△","×"],:include_blank => true %>
+        </td>
+    </tr>
+    <% end %>
+    <% end %>
+    <tr>
+        <td>
+        　<!-- テキストボックスに入力した内容を配列にセット --> 
+          <input type="submit" value="登録" onClick="shimeiSet();" >
+        </td>
+    </tr>
+    <% end %>
+ </table>
+
+</div>

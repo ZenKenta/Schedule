@@ -1,0 +1,30 @@
+@import 'colors';
+@import 'dimensions';
+
+html,body{
+    margin:0;
+    padding:0;
+    height:100%;
+}
+
+div#wrapper{
+    position:relative;
+    box-sizing:border-box;
+    min-height:100%;
+    margin:0 auto;
+    padding-bottom:($wide+$moderate)*2+$standard_height;
+    background-color:#cccccc;
+}
+
+header{
+    padding:$moderate;
+    background-color:#448888;
+    color:#eeeeee;
+    span.logo-mark{
+        font-weight:bold;
+    }
+    a{
+        float:right;
+        color:#fafafa
+    }
+}

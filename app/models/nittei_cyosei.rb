@@ -1,0 +1,2 @@
+class NitteiCyosei < ApplicationRecord
+end

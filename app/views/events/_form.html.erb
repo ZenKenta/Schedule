@@ -1,0 +1,19 @@
+<div class="notes">
+    <span class="mark">*</span>印の付いた項目は入力必須です。<br>開始日：空白は未定です
+</div>
+<div>
+    <%= f.label :name,'イベント名',class:'required' %>
+    <%= f.text_field :name,size:30,required: true %>
+</div>  
+<div class="date">
+    <%= f.label :start_date,'開始日~終了日' %>
+    <%= f.text_field :start_date,size:10 %> ～ <%= f.text_field :end_date,size:10  %>
+</div>  
+<div>
+    <%= f.label :place,'開催場所' %>
+    <%= f.text_field :place,size:30 %>
+</div>  
+<div>
+    <%= f.label :place,'イベント詳細' %>
+    <%= f.text_area :place %>
+</div>  

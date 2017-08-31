@@ -1,0 +1,2 @@
+class KakoEvent < ApplicationRecord
+end

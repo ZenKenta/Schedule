@@ -1,0 +1,33 @@
+@import 'colors';
+@import 'dimensions';
+div.table-wrapper{
+    width:90%;
+    margin: 0 auto;
+
+    div.links{
+        text-align:right;
+        padding:$moderate;
+    }
+
+    table{
+        margin: $moderate auto;    
+        border:solid $narrow #000000;
+        tr{
+            
+            th{
+                background-color:#1a3333;
+                color:#fafafa;
+            }
+            td.id,td.date{width:10%}
+            td.actions{
+                text-align:center;
+                color:#FFF8DC;
+            }
+        }
+    }
+    table.listing{
+        width:100%;
+        tr:nth-child(even){background-color:#fafafa}
+        tr:nth-child(odd){background-color:#FFF8DC}
+    }
+}

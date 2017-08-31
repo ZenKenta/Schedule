@@ -1,0 +1,32 @@
+<% @title='イベント一覧'%>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+    <div class="links">
+        <%=link_to '新規登録',:new_event%>
+        <%=link_to '戻る' ,:top %>
+    </div>
+
+    <table class="listing">
+        <tr>
+            <th>イベントID</th>
+            <th>開始日</th>
+            <th>イベント名</th>
+            <th>開催場所</th>
+            <th>状況</th>
+            <th>予定調整</th>
+        </tr>
+        <% @events.each do |n| %>
+
+        <tr>
+            <td class="id"><%= n.id %></td>
+            <td class="date"><%= n.start_date.try(:strftime,'%Y/%m/%d') %></td>
+            <td><%=link_to n.name, [:edit,n] %></td>
+            <td class><%= n.place %></td>
+            <td class="status"><% case n.status when 0 %>有効<% when 1 %>中止<% else %>-<% end %></td>
+            <td><%= link_to '詳細' , :controller => 'personal_schedules', :action => 'index', :eventid => n.id %></td>
+         </tr>
+         <% end %>               
+    </table>
+<%= paginate @events%>
+</div>

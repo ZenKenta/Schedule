@@ -1,0 +1,48 @@
+@import 'colors';
+@import 'dimensions';
+
+div#wrapper{
+    div#container{
+        div#generic-form{
+            width:480px;
+            margin:$very_wide auto;
+            padding:$very_wide;
+            border-radius:$wide;
+            border:solid 4px #990000;
+            background-color:#fafafa;
+
+            form{
+                div{
+                padding:$wide;
+                label{
+                    display:block;
+                    padding:$moderate 0;
+                }
+                label.required:after{
+                    content:'*';
+                    padding-left:$narrow;
+                    color:#cc0000;
+                }
+                textarea{
+                    width:400px;
+                    height:200px;
+                }
+                }
+                div.radio{
+                    text-align:center;
+                }
+                div.notes{
+                    text-align:right;
+                    font-size:$small;
+                    span.mark{color:#cc0000}
+                }
+                div.buttons{
+                    text-align:center;
+                    input[type='submit']{
+                        padding:$wide $very_wide;
+                    }
+                }
+            }
+        }
+    }
+}

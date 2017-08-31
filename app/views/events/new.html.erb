@@ -1,0 +1,12 @@
+<% @title='イベント登録' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+    <%= form_for [@event] do |f| %>
+        <%= render 'form',f: f%>
+        <div class="buttons">
+            <%= f.submit '登録'%>
+            <%= link_to 'キャンセル',:events%>
+        </div>
+    <% end %>
+</div>

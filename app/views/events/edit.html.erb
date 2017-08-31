@@ -1,0 +1,25 @@
+<% @title='イベントの編集' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+    <%=form_for [@event] do |f| %>
+        <%= render 'form' ,f: f %>
+        <div class="radio">
+            <label,white-space: nowrap;><%= f.radio_button :status,"0" %>更新</label>
+            <label,white-space: nowrap;><%= f.radio_button :status,"1" %>中止</label>    
+            <label,white-space: nowrap;><%= f.radio_button :status,"2" %>削除</label>
+        </div>
+        <div class="buttons">
+            <%= f.submit '更新' %>
+            <%= link_to 'キャンセル' ,:events%>
+        </div>
+
+        <div  align="center">
+            <%if @kouhobisu==0 then -%>
+                <%= link_to '日程調整' , :controller => 'nittei_cyoseis', :action => 'index', :eventid => @event.id %>
+            <%else-%>
+                <%= link_to '参加者確認' , :controller => 'personal_schedules', :action => 'index', :eventid => @event.id %>
+            <%end%>
+        </div>
+    <% end %>
+</div>
