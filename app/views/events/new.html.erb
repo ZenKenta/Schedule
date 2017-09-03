@@ -4,6 +4,10 @@
 <div id="generic-form">
     <%= form_for [@event] do |f| %>
         <%= render 'form',f: f%>
+        <div>
+            <%= f.label :kind,'イベント分類' %>
+            <%= f.select :kind,["グループ","一般募集"] %>
+        </div>  
         <div class="buttons">
             <%= f.submit '登録'%>
             <%= link_to 'キャンセル',:events%>
