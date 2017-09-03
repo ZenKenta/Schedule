@@ -6,8 +6,8 @@ class MoshikomisController < ApplicationController
         #有効,中止のイベント習得
         @moshikomis=Moshikomi.where(eventid: params[:eventid]).where(status: ['0','1']).order(:status,:shimei).page(params[:page])
         #合計人数の習得
-        @m_goukei=Moshikomi.where(eventid: params[:eventid]).where(status: ['0','1']).sum(:male)
-        @f_goukei=Moshikomi.where(eventid: params[:eventid]).where(status: ['0','1']).sum(:female)
+        @m_goukei=Moshikomi.where(eventid: params[:eventid]).where(status: ['0']).sum(:male)
+        @f_goukei=Moshikomi.where(eventid: params[:eventid]).where(status: ['0']).sum(:female)
 
     end
 
