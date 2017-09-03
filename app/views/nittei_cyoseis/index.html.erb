@@ -1,7 +1,8 @@
 <% @title='候補日登録' %>
 <h1><%= @title %></h1>
 <div id="generic-form">
-<%=form_for [@nittei_cyosei] do |f| %>
+
+  <%=form_for [@nittei_cyosei] do |f| %>
   <div class="field">
     <%= f.hidden_field :eventid ,:value=> @eventid%>
     <%= f.label :nengetsuhi,'候補日'  %>

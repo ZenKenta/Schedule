@@ -61,9 +61,10 @@ ActiveRecord::Schema.define(version: 20170813151614) do
     t.string   "shimei",                 null: false
     t.string   "email",                  null: false
     t.string   "lineId"
-    t.integer  "mail",       default: 0
-    t.integer  "femail",     default: 0
+    t.integer  "male",       default: 0
+    t.integer  "female",     default: 0
     t.string   "biko"
+    t.integer  "status",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end

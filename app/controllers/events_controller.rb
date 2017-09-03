@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
     def index
-        #有効,中止の習得
+        #有効,中止のイベント習得
         @events=Event.where(status: ['0','1']).order(:start_date).page(params[:page])
  #       @events =Event.where(status: ['0','1']).order(:id).limit(10).offset(10)
     end
@@ -21,6 +21,7 @@ class EventsController < ApplicationController
 
     def edit
         @event=Event.find(params[:id])
+        #候補日設定有無判定用
         @kouhobisu=NitteiCyosei.where(eventid: params[:id]).count
     end
 

@@ -1,0 +1,21 @@
+<% @title='参加者情報の編集' %>
+<h1><%= @title %></h1>
+<div class="links" align="right">
+    <%=link_to '一覧に戻る', :controller => 'moshikomis', :action => 'index', :eventid => @moshikomi.eventid %>
+</div>
+
+<div id="generic-form">
+    <%=form_for [@moshikomi] do |f| %>
+        <%= f.hidden_field :eventid %>
+        <%= render 'form' ,f: f %>
+        <div class="radio">
+            <label,white-space: nowrap;><%= f.radio_button :status,"0" %>参加</label>
+            <label,white-space: nowrap;><%= f.radio_button :status,"1" %>キャンセル</label>    
+            <label,white-space: nowrap;><%= f.radio_button :status,"2" %>削除</label>
+        </div>
+        <div class="buttons">
+            <%= f.submit '更新' %>
+            <%= link_to 'キャンセル' ,:events%>
+        </div>
+    <% end %>
+</div>

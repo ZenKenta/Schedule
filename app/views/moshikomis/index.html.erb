@@ -1,0 +1,56 @@
+<% @title='参加者一覧'%>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+    <div class="links">
+        <%=link_to '新規登録', :controller => 'moshikomis', :action => 'new', :eventid => @eventid %>
+        <%=link_to 'トップページに戻る' ,:top %>
+    </div>
+
+<!--合計人数表示-->
+    <table class="goukei" align="left">
+    <caption>合計人数</caption>       
+        <tr>
+            <th>男性</th>
+            <th>女性</th>
+        </tr>
+        <tr>
+            <td>
+                <%=@m_goukei%>
+            </td>
+            <td>
+                <%=@f_goukei%>
+            </td>
+        </tr>
+    </table>
+<br>
+
+<!--参加者一覧-->
+    <table class="listing">
+    <caption>申込者一覧</caption>  
+        <tr>
+            <th>参加者ID</th>
+            <th>参加者名</th>
+            <th>email</th>
+            <th>LineID</th>
+            <th>男性人数</th>
+            <th>女性人数</th>
+            <th>状況</th>
+            <th>詳細</th>
+        </tr>
+        <% @moshikomis.each do |n| %>
+
+        <tr>
+            <td class="id"><%= n.id %></td>
+            <td class="shimei"><%= n.shimei %></td>
+            <td class="email"><%= n.email %></td>
+            <td class="LineId"><%= n.lineId %></td>
+            <td class="male"><%= n.male %></td>
+            <td class="female"><%= n.female %></td>            
+            <td class="status"><% case n.status when 0 %>参加<% when 1 %>キャンセル<% else %>-<% end %></td>
+            <td><%= link_to '編集' , :controller => 'moshikomis', :action => 'edit', :id => n.id %></td>
+         </tr>
+         <% end %>               
+    </table>
+<%= paginate @moshikomis%>
+</div>

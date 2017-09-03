@@ -12,11 +12,17 @@ div.table-wrapper{
     table{
         margin: $moderate auto;    
         border:solid $narrow #000000;
+        caption{
+            text-align: left;
+        }
         tr{
             
             th{
                 background-color:#1a3333;
                 color:#fafafa;
+            }
+            td{
+                 background-color:#fafafa;           
             }
             td.id,td.date{width:10%}
             td.actions{
@@ -29,5 +35,11 @@ div.table-wrapper{
         width:100%;
         tr:nth-child(even){background-color:#fafafa}
         tr:nth-child(odd){background-color:#FFF8DC}
+    }
+    table.goukei{
+        width:20%;
+        td{
+            background-color:#fafafa;
+        }
     }
 }

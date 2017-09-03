@@ -1,0 +1,13 @@
+<% @title='参加登録' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+    <label>申込イベント：<%=@event.name%></label>
+    <%= form_for [@moshikomi] do |f| %>
+        <%= f.hidden_field :eventid, :value=> @event.id %>
+        <%= render 'form',f: f%>
+        <div class="buttons">
+            <%= f.submit '申込'%>
+        </div>
+    <% end %>
+</div>

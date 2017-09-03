@@ -1,12 +1,17 @@
 class PersonalSchedulesController < ApplicationController
 
     def index
-    #    @personal_schedules=PersonalSchedule.where(eventid: params[:eventid])
+        #受け渡し用イベントIDのセット
         @eventid=params[:eventid]
+        #候補日取得
         @nittei_cyosei=NitteiCyosei.where(eventid:params[:eventid]).order(:nengetsuhi)
+        #出欠内容取得
         @schedule_list=PersonalSchedule.where(eventid: params[:eventid]).order(:shimei,:nengetsuhi)
-
-         if params[:shimei].present?
+        #出欠合計数取得
+        @goukei_list=PersonalSchedule.where(eventid: params[:eventid]).group("TO_CHAR(nengetsuhi,'YYYY-MM-DD')",:value).count
+ 
+        #新規と更新の判別処理
+        if params[:shimei].present?
             @personal_schedules=PersonalSchedule.where(eventid: params[:eventid]).where(shimei:params[:shimei]).order(:nengetsuhi)
         else
             @personal_schedules=(1..@nittei_cyosei.count).map do
@@ -27,14 +32,11 @@ class PersonalSchedulesController < ApplicationController
         @eventid=params[:eventid]
 
         flash.notice='候補日を追加しました'
-        flash.notice=params[:personal_schedules]
         redirect_to request.referer          
 
     end
 
-    def update
-        personal_schedules=[]
-        
+    def update      
         @personal_schedule = update_params.map do |id, param|
         personal_schedule = PersonalSchedule.find(id)
         personal_schedule.update_attributes(param)
@@ -49,11 +51,13 @@ class PersonalSchedulesController < ApplicationController
 
     #パラメータ定義
     private
+    #更新時利用パラメータ
     def update_params
         params.permit(personal_schedules:[:nengetsuhi,:value])[:personal_schedules]
            
     end
 
+    #新規作成時パラメータ
     def personal_schedules_params
         params.require(:personal_schedules).map do |p|
             ActionController::Parameters.new(p.to_hash).permit(:eventid,:nengetsuhi,:shimei,:value)

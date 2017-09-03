@@ -1,0 +1,27 @@
+<div class="notes">
+    <span class="mark">*</span>印の付いた項目は入力必須です。
+</div>
+<div>
+    <%= f.label :shimei,'氏名',class:'required' %>
+    <%= f.text_field :shimei,size:30,required: true %>
+</div>  
+<div>
+    <%= f.label :email,'e-mail',class:'required' %>
+    <%= f.text_field :email,size:30,required: true %>
+</div>  
+<div>
+    <%= f.label :lineId,'LineID' %>
+    <%= f.text_field :lineId,size:30 %>
+</div>  
+<div>
+    <%= f.label :male,'男性人数',class:'required' %>
+    <%= f.text_field :male,size:3 ,required: true %>
+</div>  
+<div>
+    <%= f.label :female,'女性人数',class:'required' %>
+    <%= f.text_field :female ,size:3,required: true %>
+</div>  
+<div>
+    <%= f.label :biko,'補足情報' %>
+    <%= f.text_area :biko %>
+</div>  

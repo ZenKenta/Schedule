@@ -1,49 +1,88 @@
 
-<% @title='予定一覧'%>
+<% @title='参加予定一覧'%>
 <h1><%= @title %></h1>
+   <div class="links" align="right">
+     <%= link_to 'イベント一覧に戻る' ,:events%>
+     <%=link_to 'トップページに戻る' ,:top %>
+  </div>
+  <div id="generic-form">
+    <div class="table-wrapper">
 
-<div id="generic-form">
-<div class="table-wrapper">
-
-<table class="listing">
-<tr>
-  <th>参加者</th>
-  <% @nittei_cyosei.each do |n| %>
-  <th><%= n.nengetsuhi %></th>
-  <% end %>
-</tr>
-
-<tr>
-<% @schedule_list.each do |f| %>
-<!-- 対象者が切り替わった段階で改行  -->    
-  <% if @temp!=f.shimei then -%>
-  </tr>
-  <tr><td><%= link_to f.shimei, personal_schedules_path(shimei: f.shimei,eventid: @eventid) %></td><td><%= f.value %></td>
-  <% else -%><td><%= f.value %></td></tr><tr>
-  <%end%>
-  <% @temp= f.shimei%>
-  
+<!--合計人数表示-->
+    <table class="listing">
+    <caption>合計人数</caption>
+    <tr>
+      <th>日付</th>
+      <th>○</th>
+      <th>△</th>
+      <th>×</th>
+    </tr>
+<% @nittei_cyosei.each do |m| %>
+    <tr>
+      <td>
+        <%=m.nengetsuhi%>
+      </td>
+      <td>
+        <%test=[m.nengetsuhi.to_s,"○"]%>
+        <%=@goukei_list[test]%>
+      </td>
+      <td>
+        <%test=[m.nengetsuhi.to_s,"△"]%>
+        <%=@goukei_list[test]%>
+      </td>
+      <td>
+        <%test=[m.nengetsuhi.to_s,"×"]%>
+        <%=@goukei_list[test]%>
+      </td>
+    </tr>
 <% end %>
-</tr>
- </table>
+  </table>
+<br>
+
+  <!--登録内容表示-->
+  <table class="listing">
+    <caption>参加者一覧</caption>
+    <tr>
+      <th>参加者</th>
+    <% @nittei_cyosei.each do |n| %>
+      <th><%= n.nengetsuhi %></th>
+    <% end %>
+    </tr>
+
+    <tr>
+    <% @schedule_list.each do |f| %>
+    <!-- 対象者が切り替わった段階で改行  -->    
+      <% if @temp!=f.shimei then -%>
+    </tr>
+    <tr>
+      <td><%= link_to f.shimei, personal_schedules_path(shimei: f.shimei,eventid: @eventid) %></td><td><%= f.value %></td>
+      <% else -%>
+      <td><%= f.value %></td></tr><tr>
+      <%end%>
+    <% @temp= f.shimei%>
+    <% end %>
+    </tr>
+  </table>
 </div>
 <br>
 <br>
 
-
-
-
+<!--登録欄表示-->
+<!--候補日確定されていない場合、登録できないようにして候補日設定へのリンクを表示-->
+<%if @personal_schedules.count==0 -%>
+  <label>候補日を確定させて下さい</label><br>
+  <%= link_to '候補日設定へ' , :controller => 'nittei_cyoseis', :action => 'index', :eventid => @eventid %>
+<%else -%>
 <div align="center">名前:
-
-        <% if @personal_schedules.first.shimei.present?  -%>          
-            <label name="input-shimei" ><%=@personal_schedules.first.shimei%></label>
+      <%if @personal_schedules.first.shimei.present? then -%>
+            <label><%=@personal_schedules.first.shimei%></label>
             <%@method='PATCH' -%>
             <%@type='UPDATE' -%>
-        <% else -%>
-            <input type="text" name="input-shimei" >
+      <% else -%>
+            <input type="text" name="input-shimei" required="required"/>
             <%@meshod='POST' -%>
             <%@type='CREATE' -%>
-        <% end %>
+      <% end %>
 </div>
   <%= form_tag personal_schedules_path, method: @method,action:@type do  %>
    <table align="center">
@@ -66,11 +105,11 @@
     <% end %>
     <tr>
         <td>
-        　<!-- テキストボックスに入力した内容を配列にセット --> 
+        　<!-- javascriptでテキストボックスに入力した内容を登録情報にセット --> 
           <input type="submit" value="登録" onClick="shimeiSet();" >
         </td>
     </tr>
     <% end %>
  </table>
-
+ <%end%>
 </div>

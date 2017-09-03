@@ -12,6 +12,7 @@ Rails.application.routes.draw do
    get   'personal_schedules'  => 'personal_schedules#index'
    post  'personal_schedules'  => 'personal_schedules#create'
    resources :nittei_cyoseis,only:[:index,:create,:destroy]
+   resources :moshikomis,except:[:show,:destroy]
 
 
 end
