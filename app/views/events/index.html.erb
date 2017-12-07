@@ -10,16 +10,19 @@
     <table class="listing">
         <tr>
             <th>イベントID</th>
+            <th>種別</th>
             <th>開始日</th>
             <th>イベント名</th>
             <th>開催場所</th>
             <th>状況</th>
+
             <th>参加者一覧</th>
         </tr>
         <% @events.each do |n| %>
 
         <tr>
             <td class="id"><%= n.id %></td>
+            <td><%=n.kind%></td>
             <td class="date"><%= n.start_date.try(:strftime,'%Y/%m/%d') %></td>
             <td><%=link_to n.name, [:edit,n] %></td>
             <td class><%= n.place %></td>

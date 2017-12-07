@@ -1,4 +1,4 @@
-class PersonalSchedulesController < ApplicationController
+class PersonalSchedulesController < Common
 
     def index
         #受け渡し用イベントIDのセット

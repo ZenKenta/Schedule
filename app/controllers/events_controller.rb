@@ -1,4 +1,5 @@
-class EventsController < ApplicationController
+class EventsController < Common
+
     def index
         #有効,中止のイベント習得
         @events=Event.where(status: ['0','1']).order(:start_date).page(params[:page])
@@ -36,8 +37,10 @@ class EventsController < ApplicationController
         end
     end
 
-#パラメータ定義
+
     private 
+
+#パラメータ定義
     def event_params
     params.require(:event).permit(
         :name,:start_date,:end_date,:place,:detail,:status,:kind

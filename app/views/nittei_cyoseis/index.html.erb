@@ -6,7 +6,7 @@
   <div class="field">
     <%= f.hidden_field :eventid ,:value=> @eventid%>
     <%= f.label :nengetsuhi,'候補日'  %>
-    <%= f.text_field :nengetsuhi ,size:10 %>
+    <%= f.text_field :nengetsuhi ,size:10,required: true %>
     <%= f.submit '追加' %>
     <%= link_to '確定' , :controller => 'personal_schedules', :action => 'index', :eventid => @eventid %>
   </div>

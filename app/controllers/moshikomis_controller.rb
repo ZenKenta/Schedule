@@ -1,7 +1,9 @@
 class MoshikomisController < ApplicationController
 
-
-    def index 
+    def index
+        unless current_user
+             redirect_to :login       
+        end
         @eventid=params[:eventid]
         #有効,中止のイベント習得
         @moshikomis=Moshikomi.where(eventid: params[:eventid]).where(status: ['0','1']).order(:status,:shimei).page(params[:page])
@@ -19,12 +21,15 @@ class MoshikomisController < ApplicationController
     def create
         @moshikomi=Moshikomi.new(moshikomi_params)
         if @moshikomi.save
-            flash.notice='参加申込が完了しました。'
-            redirect_to request.referer  
+            #flash.notice='参加申込が完了しました。'
+            render :action => 'complete'
         end
     end
 
     def edit
+        unless current_user
+             redirect_to :login       
+        end
         @moshikomi=Moshikomi.find(params[:id])
     end
 

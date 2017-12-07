@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
         end
         if user
             session[:user_id]=user.id
-            redirect_to root_path
+            redirect_to :top
         else
             flash.now.alert = "ログインに失敗しました"
             render "new"
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 
     def destroy
         session.delete(:user_id)
-        redirect_to :root
+        redirect_to :login
     end
 
 #パラメータ定義

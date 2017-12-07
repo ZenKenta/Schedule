@@ -1,4 +1,4 @@
-class NitteiCyoseisController < ApplicationController
+class NitteiCyoseisController < Common
 
     def index
             @eventid=params[:eventid]
